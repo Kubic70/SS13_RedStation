@@ -30,9 +30,12 @@
 
 /datum/round_event/aurora_caelus/start()
 	for(var/area/affected_area as anything in GLOB.areas)
+		//RedEdit       This so heavy
+		/*
 		if(affected_area.area_flags & AREA_USES_STARLIGHT)
 			for(var/turf/open/space/spess in affected_area.get_contained_turfs())
 				spess.set_light(spess.light_range * 3, spess.light_power * 0.5)
+		*/
 		if(istype(affected_area, /area/station/service/kitchen))
 			for(var/turf/open/kitchen in affected_area.get_contained_turfs())
 				kitchen.set_light(1, 0.75)
@@ -50,10 +53,16 @@
 					seymour.say("My roast is ruined!!!", forced = "ruined roast")
 					seymour.emote("scream")
 
+	for(var/mob/living/carbon/human/M as anything in GLOB.human_list)
+		SEND_SIGNAL(M, "aurora_begin", src)
+	for(var/mob/dead/observer/M as anything in GLOB.current_observers_list)
+		SEND_SIGNAL(M, "aurora_begin", src)
 
 /datum/round_event/aurora_caelus/tick()
 	if(activeFor % 5 == 0)
 		aurora_progress++
+		//RedEdit        This so heavy
+		/*
 		var/aurora_color = aurora_colors[aurora_progress]
 		for(var/area/affected_area as anything in GLOB.areas)
 			if(affected_area.area_flags & AREA_USES_STARLIGHT)
@@ -62,8 +71,11 @@
 			if(istype(affected_area, /area/station/service/kitchen))
 				for(var/turf/open/kitchen_floor in affected_area.get_contained_turfs())
 					kitchen_floor.set_light(l_color = aurora_color)
+					*/
 
 /datum/round_event/aurora_caelus/end()
+//RedEdit        This so heavy
+/*
 	for(var/area in GLOB.areas)
 		var/area/affected_area = area
 		if(affected_area.area_flags & AREA_USES_STARLIGHT)
@@ -72,6 +84,13 @@
 		if(istype(affected_area, /area/station/service/kitchen))
 			for(var/turf/open/superturfentent in affected_area.get_contained_turfs())
 				fade_to_black(superturfentent)
+*/
+
+	for(var/mob/living/carbon/human/M as anything in GLOB.human_list)
+		SEND_SIGNAL(M, "aurora_end", src)
+	for(var/mob/dead/observer/M as anything in GLOB.current_observers_list)
+		SEND_SIGNAL(M, "aurora_end", src)
+
 	priority_announce("The aurora caelus event is now ending. Starlight conditions will slowly return to normal. When this has concluded, please return to your workplace and continue work as normal. Have a pleasant shift, [station_name()], and thank you for watching with us.",
 	sound = 'sound/misc/notice2.ogg',
 	sender_override = "Nanotrasen Meteorology Division")

@@ -16,6 +16,7 @@
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_1(null, screenmob)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_2(null, screenmob)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/planet(null, screenmob)
+		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/aurora(null, screenmob) //RedEdit
 		if(SSparallax.random_layer)
 			C.parallax_layers_cached += new SSparallax.random_layer(null, screenmob)
 		C.parallax_layers_cached += new /atom/movable/screen/parallax_layer/layer_3(null, screenmob)
@@ -261,7 +262,7 @@
 // We need parallax to always pass its args down into initialize, so we immediate init it
 INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 /atom/movable/screen/parallax_layer
-	icon = 'icons/effects/parallax.dmi'
+	icon = 'modular_red/icons/effects/parallax.dmi' //RedEdit
 	var/speed = 1
 	var/offset_x = 0
 	var/offset_y = 0
@@ -371,3 +372,59 @@ INITIALIZE_IMMEDIATE(/atom/movable/screen/parallax_layer)
 
 /atom/movable/screen/parallax_layer/planet/update_o()
 	return //Shit won't move
+
+//RedEdit
+/atom/movable/screen/parallax_layer/aurora
+	icon = 'modular_red/icons/effects/aurora.dmi'
+	icon_state = "aurora"
+	absolute = TRUE
+	speed = 5
+	layer = 30
+
+/atom/movable/screen/parallax_layer/aurora/Initialize(mapload, mob/owner)
+	. = ..()
+	if(!owner?.client)
+		return
+	var/static/list/connections = list(
+		COMSIG_MOVABLE_Z_CHANGED = PROC_REF(on_z_change),
+		COMSIG_MOB_LOGOUT = PROC_REF(on_mob_logout),
+		//COMSIG_CREATED_ROUND_EVENT = PROC_REF(on_events),
+		"aurora_begin" = PROC_REF(on_begin),
+		"aurora_end" = PROC_REF(on_end),
+	)
+	AddComponent(/datum/component/connect_mob_behalf, owner.client, connections)
+	on_z_change(owner)
+
+/atom/movable/screen/parallax_layer/aurora/proc/on_begin(mob/source)
+	SIGNAL_HANDLER
+	var/client/boss = source.client
+	var/turf/posobj = get_turf(boss?.eye)
+	if(!posobj)
+		return
+	invisibility = 0
+
+/atom/movable/screen/parallax_layer/aurora/proc/on_end(mob/source)
+	SIGNAL_HANDLER
+	var/client/boss = source.client
+	var/turf/posobj = get_turf(boss?.eye)
+	if(!posobj)
+		return
+	invisibility = INVISIBILITY_ABSTRACT
+
+/atom/movable/screen/parallax_layer/aurora/proc/on_mob_logout(mob/source)
+	SIGNAL_HANDLER
+	var/client/boss = source.canon_client
+	on_z_change(boss.mob)
+
+/atom/movable/screen/parallax_layer/aurora/proc/on_z_change(mob/source)
+	SIGNAL_HANDLER
+	var/client/boss = source.client
+	var/turf/posobj = get_turf(boss?.eye)
+	if(!posobj)
+		return
+	if(is_station_level(posobj.z))
+		for(var/datum/round_event/running_event in SSevents.running)
+			if(istype(running_event, /datum/round_event/aurora_caelus))
+				invisibility = 0
+				return
+	invisibility = INVISIBILITY_ABSTRACT
