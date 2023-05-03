@@ -26,6 +26,9 @@ export type MedicalRecord = {
   quirk_notes: string;
   rank: string;
   species: string;
+  // RedEdit
+  past_general_records: string;
+  past_medical_records: string;
 };
 
 export type MedicalNote = {

@@ -3,7 +3,7 @@ import { BooleanLike, classes } from 'common/react';
 import { ComponentType, createComponentVNode, InfernoNode } from 'inferno';
 import { VNodeFlags } from 'inferno-vnode-flags';
 import { sendAct, useBackend, useLocalState } from '../../../../backend';
-import { Box, Button, Dropdown, Input, NumberInput, Stack } from '../../../../components';
+import { Box, Button, Dropdown, Input, NumberInput, Stack, Knob } from '../../../../components';
 import { createSetPreference, PreferencesMenuData } from '../../data';
 import { ServerPreferencesFetcher } from '../../ServerPreferencesFetcher';
 
@@ -362,6 +362,29 @@ export const FeatureShortTextInput = (
       value={props.value}
       maxLength={props.serverData.maximum_length}
       onChange={(_, value) => props.handleSetValue(value)}
+    />
+  );
+};
+
+// #RedEdit
+export const FeatureKnobInput = (
+  props: FeatureValueProps<number, number, FeatureNumericData>
+) => {
+  if (!props.serverData) {
+    return <Box>Loading...</Box>;
+  }
+
+  return (
+    <Knob
+      size={2}
+      step={props.serverData.step}
+      stepPixelSize={6}
+      value={props.value}
+      minValue={props.serverData.minimum}
+      maxValue={props.serverData.maximum}
+      onDrag={(e, value) => {
+        props.handleSetValue(value);
+      }}
     />
   );
 };

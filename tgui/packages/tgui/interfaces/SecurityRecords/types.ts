@@ -24,6 +24,9 @@ export type SecurityRecord = {
   rank: string;
   species: string;
   wanted_status: string;
+  // RedEdit
+  past_general_records: string;
+  past_security_records: string;
 };
 
 export type Crime = {

@@ -56,6 +56,10 @@
 	bot_mode_flags = BOT_MODE_ON | BOT_MODE_AUTOPATROL | BOT_MODE_REMOTE_ENABLED
 	commissioned = TRUE
 
+	//RedEdit
+	vocal_bark_id = "synth"
+	vocal_pitch_range = 0.1
+
 /mob/living/simple_animal/bot/secbot/beepsky/officer
 	name = "Officer Beepsky"
 	desc = "It's Officer Beepsky! Powered by a potato and a shot of whiskey, and with a sturdier reinforced chassis, too."

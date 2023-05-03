@@ -58,6 +58,9 @@
 	#define HEARING_MESSAGE_MODE 7
 	#define HEARING_RANGE 8
 
+/// RedEdit from base of atom/movable/proc/Bark(): (list/hearers, distance, volume, pitch)
+#define COMSIG_MOVABLE_BARK "movable_bark"
+
 ///called when the movable is added to a disposal holder object for disposal movement: (obj/structure/disposalholder/holder, obj/machinery/disposal/source)
 #define COMSIG_MOVABLE_DISPOSING "movable_disposing"
 // called when movable is expelled from a disposal pipe, bin or outlet on obj/pipe_eject: (direction)

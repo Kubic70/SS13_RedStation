@@ -30,6 +30,12 @@
 
 	footstep_type = FOOTSTEP_MOB_CLAW
 
+	//RedEdit
+	vocal_bark_id = "bullet"
+	vocal_speed = 2
+	vocal_pitch = 1.6
+	vocal_pitch_range = 0.4
+
 /mob/living/simple_animal/pet/fox/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/pet_bonus, "pants and yaps happily!")

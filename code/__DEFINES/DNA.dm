@@ -37,7 +37,12 @@
 #define DNA_HAIR_COLOR_BLOCK 1
 #define DNA_HAIRSTYLE_BLOCK 7
 #define DNA_SKIN_TONE_BLOCK 3
-#define DNA_UNI_IDENTITY_BLOCKS 7
+//RedEdit
+#define DNA_BARK_SOUND_BLOCK 8
+#define DNA_BARK_SPEED_BLOCK 9
+#define DNA_BARK_PITCH_BLOCK 10
+#define DNA_BARK_VARIANCE_BLOCK	11
+#define DNA_UNI_IDENTITY_BLOCKS 11 //RedEdit 7 default
 
 /// This number needs to equal the total number of DNA blocks
 #define DNA_FEATURE_BLOCKS 15

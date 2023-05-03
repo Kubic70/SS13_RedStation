@@ -30,6 +30,9 @@ export const MedicalRecordView = (props, context) => {
     name,
     quirk_notes,
     rank,
+    // RedEdit
+    past_general_records,
+    past_medical_records,
     species,
   } = foundRecord;
 
@@ -184,6 +187,17 @@ export const MedicalRecordView = (props, context) => {
               {quirk_notes_array.map((quirk, index) => (
                 <Box key={index}>&#8226; {quirk}</Box>
               ))}
+            </LabeledList.Item>
+            {/* RedEdit*/}
+            <LabeledList.Item label="General Records">
+              <Box wrap maxWidth="100%">
+                {past_general_records || 'N/A'}
+              </Box>
+            </LabeledList.Item>
+            <LabeledList.Item label="Past Medical Records">
+              <Box wrap maxWidth="100%">
+                {past_medical_records || 'N/A'}
+              </Box>
             </LabeledList.Item>
           </LabeledList>
         </Section>
