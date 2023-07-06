@@ -63,10 +63,6 @@
 	savefile_key = "sound_bark"
 	savefile_identifier = PREFERENCE_PLAYER
 
-/datum/preference/toggle/sound_bark/apply_to_client_updated(client/client, value)
-	if (!value)
-		client.mob.stop_sound_channel(SOUND_BARK)
-
 /datum/preference/choiced/bark_id
 	category = PREFERENCE_CATEGORY_BARKS_DATA
 	savefile_identifier = PREFERENCE_CHARACTER

@@ -1,4 +1,4 @@
-import { FeatureChoiced, FeatureDropdownInput, FeatureKnobInput, FeatureNumeric } from '../base';
+import { FeatureChoiced, FeatureDropdownInput, FeatureKnobInput, FeatureNumeric, FeatureToggle, CheckboxInput } from '../base';
 
 export const bark_id: FeatureChoiced = {
   name: 'Voice',
@@ -22,4 +22,11 @@ export const bark_variance: FeatureNumeric = {
   name: 'Variance',
   category: 'bark_data',
   component: FeatureKnobInput,
+};
+
+export const sound_bark: FeatureToggle = {
+  name: 'Enable Barking',
+  category: 'SOUND',
+  description: 'When enabled, be able to hear speech sounds in game.',
+  component: CheckboxInput,
 };
