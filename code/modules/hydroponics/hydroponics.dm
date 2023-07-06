@@ -167,8 +167,8 @@
 	var/tmp_capacity = 0
 	for (var/datum/stock_part/matter_bin/matter_bin in component_parts)
 		tmp_capacity += matter_bin.tier
-	for (var/datum/stock_part/manipulator/manipulator in component_parts)
-		rating = manipulator.tier
+	for (var/datum/stock_part/servo/servo in component_parts)
+		rating = servo.tier
 	maxwater = tmp_capacity * 50 // Up to 300
 	maxnutri = (tmp_capacity * 5) + STATIC_NUTRIENT_CAPACITY // Up to 50 Maximum
 	reagents.maximum_volume = maxnutri
@@ -822,7 +822,7 @@
 		message_admins("[ADMIN_LOOKUPFLW(user)] last altered a hydro tray's contents which spawned spiderlings.")
 		user.log_message("last altered a hydro tray, which spiderlings spawned from.", LOG_GAME)
 		visible_message(span_warning("The pests seem to behave oddly..."))
-		spawn_atom_to_turf(/obj/structure/spider/spiderling/hunter, src, 3, FALSE)
+		spawn_atom_to_turf(/mob/living/basic/spiderling/hunter, src, 3, FALSE)
 	else if(myseed)
 		visible_message(span_warning("The pests seem to behave oddly in [myseed.name] tray, but quickly settle down..."))
 
@@ -988,9 +988,13 @@
 		return
 
 	else if(istype(O, /obj/item/storage/bag/plants))
-		attack_hand(user)
-		for(var/obj/item/food/grown/G in locate(user.x,user.y,user.z))
-			O.atom_storage?.attempt_insert(G, user, TRUE)
+		if(plant_status == HYDROTRAY_PLANT_HARVESTABLE)
+			var/list/harvest = myseed.harvest(user)
+			for(var/obj/item/food/grown/G in harvest)
+				O.atom_storage?.attempt_insert(G, user, TRUE)
+		else if(plant_status == HYDROTRAY_PLANT_DEAD)
+			to_chat(user, span_notice("You remove the dead plant from [src]."))
+			set_seed(null)
 		return
 
 	else if(O.tool_behaviour == TOOL_SHOVEL)
@@ -1132,7 +1136,7 @@
  * Upon using strange reagent on a tray, it will spawn a killer tomato or killer tree at random.
  */
 /obj/machinery/hydroponics/proc/spawnplant() // why would you put strange reagent in a hydro tray you monster I bet you also feed them blood
-	var/list/livingplants = list(/mob/living/basic/tree, /mob/living/simple_animal/hostile/killertomato)
+	var/list/livingplants = list(/mob/living/basic/tree, /mob/living/basic/killer_tomato)
 	var/chosen = pick(livingplants)
 	var/mob/living/C = new chosen(get_turf(src))
 	C.faction = list(FACTION_PLANTS)
