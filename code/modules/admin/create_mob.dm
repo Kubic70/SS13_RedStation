@@ -33,6 +33,12 @@
 	for(var/datum/species/species_path as anything in subtypesof(/datum/species))
 		var/datum/species/new_species = new species_path
 		new_species.randomize_features(human)
+
+	// RedEdit
+	human.set_bark(pick(GLOB.bark_random_list))
+	human.vocal_pitch = BARK_PITCH_RAND(human.gender)
+	human.vocal_pitch_range = BARK_VARIANCE_RAND
+
 	human.dna.species.spec_updatehealth(human)
 	human.dna.update_dna_identity()
 	human.updateappearance()

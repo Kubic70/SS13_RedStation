@@ -49,6 +49,10 @@
 	var/hack_software = FALSE //Will be able to use hacking actions
 	interaction_range = 7 //wireless control range
 
+	//RedEdit
+	vocal_bark_id = "synth"
+	vocal_pitch_range = 0.1
+
 	var/obj/item/modular_computer/pda/silicon/modularInterface
 
 /mob/living/silicon/Initialize(mapload)

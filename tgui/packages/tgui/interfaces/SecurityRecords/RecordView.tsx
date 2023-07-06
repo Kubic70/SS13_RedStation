@@ -56,6 +56,9 @@ const RecordInfo = (props, context) => {
     rank,
     species,
     wanted_status,
+    // RedEdit
+    past_general_records,
+    past_security_records,
   } = foundRecord;
 
   const hasValidCrimes = !!crimes.find((crime) => !!crime.valid);
@@ -174,6 +177,17 @@ const RecordInfo = (props, context) => {
                 target_ref={crew_ref}
                 text={note}
               />
+            </LabeledList.Item>
+            {/* RedEdit */}
+            <LabeledList.Item label="General Records">
+              <Box wrap maxWidth="100%">
+                {past_general_records || 'N/A'}
+              </Box>
+            </LabeledList.Item>
+            <LabeledList.Item label="Past Security Records">
+              <Box wrap maxWidth="100%">
+                {past_security_records || 'N/A'}
+              </Box>
             </LabeledList.Item>
           </LabeledList>
         </Section>

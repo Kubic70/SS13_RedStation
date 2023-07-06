@@ -134,6 +134,9 @@ export type PreferencesMenuData = {
     };
     secondary_features: Record<string, unknown>;
     supplemental_features: Record<string, unknown>;
+    flavor_data: Record<string, string>; // RedEdit
+    headshot_data: Record<string, string>;
+    bark_data: Record<string, string>;
 
     names: Record<string, string>;
 

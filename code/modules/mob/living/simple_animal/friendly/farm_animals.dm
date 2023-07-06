@@ -34,6 +34,8 @@
 	stop_automated_movement_when_pulled = 1
 	blood_volume = BLOOD_VOLUME_NORMAL
 
+	vocal_bark_id = "banjoc3" //RedEdit
+
 	footstep_type = FOOTSTEP_MOB_SHOE
 
 /mob/living/simple_animal/hostile/retaliate/goat/Initialize(mapload)
@@ -152,6 +154,10 @@
 	mob_size = MOB_SIZE_TINY
 	gold_core_spawnable = FRIENDLY_SPAWN
 
+	//RedEdit
+	vocal_bark_id = "squeak"
+	vocal_pitch = 1.4
+
 	footstep_type = FOOTSTEP_MOB_CLAW
 
 /mob/living/simple_animal/chick/Initialize(mapload)
@@ -214,6 +220,11 @@ GLOBAL_VAR_INIT(chicken_count, 0)
 	footstep_type = FOOTSTEP_MOB_CLAW
 	///boolean deciding whether eggs laid by this chicken can hatch into chicks
 	var/fertile = TRUE
+
+	//RedEdit
+	vocal_bark_id = "synthgrunt"
+	vocal_pitch = 1.4
+	vocal_pitch_range = 0.4
 
 /mob/living/simple_animal/chicken/Initialize(mapload)
 	. = ..()

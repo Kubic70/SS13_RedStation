@@ -44,6 +44,10 @@
 		/datum/pet_command/play_dead,
 	)
 
+	//Red Edit
+	vocal_bark_id = "bullet"
+	vocal_speed = 6
+
 /mob/living/basic/pet/dog/Initialize(mapload)
 	. = ..()
 	AddElement(/datum/element/pet_bonus, "woofs happily!")
@@ -724,6 +728,9 @@ GLOBAL_LIST_INIT(strippable_corgi_items, create_strippable_list(list(
 	mob_size = MOB_SIZE_SMALL
 	collar_icon_state = "puppy"
 
+	//RedEdit
+	vocal_pitch = 1.6
+
 //puppies cannot wear anything.
 /mob/living/basic/pet/dog/corgi/puppy/Topic(href, href_list)
 	if(href_list["remove_inv"] || href_list["add_inv"])
@@ -752,6 +759,9 @@ GLOBAL_LIST_INIT(strippable_corgi_items, create_strippable_list(list(
 	unsuitable_atmos_damage = 0
 	minimum_survivable_temperature = TCMB
 	maximum_survivable_temperature = T0C + 40
+
+	//RedEdit
+	vocal_pitch = 0.6
 
 /mob/living/basic/pet/dog/corgi/puppy/void/Initialize(mapload)
 	. = ..()

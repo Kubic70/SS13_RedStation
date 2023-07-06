@@ -9,6 +9,9 @@
 #define CHANNEL_TRAITOR 1017
 #define CHANNEL_CHARGED_SPELL 1016
 
+//RedEdit
+#define SOUND_BARK 111
+
 ///Default range of a sound.
 #define SOUND_RANGE 17
 #define MEDIUM_RANGE_SOUND_EXTRARANGE -5
